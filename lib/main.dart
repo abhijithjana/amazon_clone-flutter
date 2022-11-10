@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Amazon clone',
       onGenerateRoute: ((settings) => generatedrouth(settings)),
       theme: ThemeData(
           scaffoldBackgroundColor: GlobalVariable.backgroundColor,
@@ -21,22 +22,7 @@ class MyApp extends StatelessWidget {
           ),
           appBarTheme: AppBarTheme(
               elevation: 0, iconTheme: IconThemeData(color: Colors.black))),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("hello"),
-          centerTitle: true,
-        ),
-        body: Center(
-          child: Builder(builder: (context) {
-            return ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, AuthScreen.routhname);
-              },
-              child: Text("click me "),
-            );
-          }),
-        ),
-      ),
+      home: AuthScreen(),
     );
   }
 }
