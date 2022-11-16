@@ -16,7 +16,13 @@ class CustomTextInputfeild extends StatelessWidget {
               borderSide: BorderSide(color: Colors.black38)),
           enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.black38))),
-      validator: ((value) {}),
+      validator: ((value) {
+        if (value == null || value.isEmpty) {
+          return "Enter your $hint";
+        } else {
+          return null;
+        }
+      }),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:amazon_clone/constatn/globalvariable.dart';
+import 'package:amazon_clone/features/auth/services/auth_services.dart';
 import 'package:amazon_clone/features/auth/widgets/customelevatedbutton.dart';
 import 'package:amazon_clone/features/auth/widgets/textinput.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class AuthScreen extends StatefulWidget {
 enum Auth_name { signin, signup }
 
 class _AuthScreenState extends State<AuthScreen> {
+  AuthServices authservices = AuthServices();
   final signinkey = GlobalKey<FormState>();
   final signupkey = GlobalKey<FormState>();
 
@@ -23,7 +25,7 @@ class _AuthScreenState extends State<AuthScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
 
-  Auth_name authname = Auth_name.signin;
+  Auth_name authname = Auth_name.signup;
 
   @override
   void dispose() {
@@ -32,6 +34,21 @@ class _AuthScreenState extends State<AuthScreen> {
     _passwordController.dispose();
     _nameController.dispose();
     super.dispose();
+  }
+
+  void signup() {
+    authservices.signup(
+        context: context,
+        name: _nameController.text,
+        password: _passwordController.text,
+        email: _emailController.text);
+  }
+
+  void signin() {
+    authservices.signin(
+        context: context,
+        password: _passwordController.text,
+        email: _emailController.text);
   }
 
   @override
@@ -71,38 +88,44 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
               ),
               if (authname == Auth_name.signup)
-                SingleChildScrollView(
-                  child: Container(
-                    padding: EdgeInsets.all(8),
-                    color: GlobalVariable.backgroundColor,
-                    child: Form(
-                      key: signinkey,
-                      child: Column(
-                        children: [
-                          CustomTextInputfeild(
-                            controller: _nameController,
-                            hint: "Name",
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          CustomTextInputfeild(
-                            controller: _emailController,
-                            hint: "Email",
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          CustomTextInputfeild(
-                            controller: _passwordController,
-                            hint: "Password",
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          CustomElevatedBustton(text: "Sign up", ontap: () {})
-                        ],
-                      ),
+                Container(
+                  padding: EdgeInsets.all(8),
+                  color: GlobalVariable.backgroundColor,
+                  child: Form(
+                    key: signupkey,
+                    child: Column(
+                      children: [
+                        CustomTextInputfeild(
+                          controller: _nameController,
+                          hint: "Name",
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomTextInputfeild(
+                          controller: _emailController,
+                          hint: "Email",
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomTextInputfeild(
+                          controller: _passwordController,
+                          hint: "Password",
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomElevatedBustton(
+                            text: "Sign up",
+                            ontap: () {
+                              if (signupkey.currentState!.validate()) {
+                                signup();
+                              } else {
+                                print("error");
+                              }
+                            })
+                      ],
                     ),
                   ),
                 ),
@@ -148,7 +171,13 @@ class _AuthScreenState extends State<AuthScreen> {
                           const SizedBox(
                             height: 10,
                           ),
-                          CustomElevatedBustton(text: "Sign in", ontap: () {})
+                          CustomElevatedBustton(
+                              text: "Sign in",
+                              ontap: () {
+                                if (signinkey.currentState!.validate()) {
+                                  signin();
+                                }
+                              })
                         ],
                       ),
                     ),
