@@ -1,11 +1,13 @@
 import 'package:amazon_clone/constatn/globalvariable.dart';
-import 'package:amazon_clone/features/auth/screens/authscreen.dart';
-import 'package:amazon_clone/features/auth/screens/home/home.dart';
+import 'package:amazon_clone/features/screens/authscreen.dart';
+import 'package:amazon_clone/features/screens/home/home.dart';
 import 'package:amazon_clone/features/auth/services/auth_services.dart';
 import 'package:amazon_clone/provider/user_provider.dart';
 import 'package:amazon_clone/routh.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'features/auth/widgets/buttomnevigation.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
@@ -42,7 +44,7 @@ class _MyAppState extends State<MyApp> {
               elevation: 0, iconTheme: IconThemeData(color: Colors.black))),
       home: Provider.of<UserProvider>(context).user.token.isEmpty
           ? AuthScreen()
-          : HomeScreen(),
+          : ButoomNevigatorCustom(),
     );
   }
 }

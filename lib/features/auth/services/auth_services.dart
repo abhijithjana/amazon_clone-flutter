@@ -3,7 +3,8 @@ import 'dart:convert';
 import 'package:amazon_clone/constatn/globalvariable.dart';
 import 'package:amazon_clone/constatn/httperror.dart';
 import 'package:amazon_clone/constatn/utils.dart';
-import 'package:amazon_clone/features/auth/screens/home/home.dart';
+import 'package:amazon_clone/features/screens/home/home.dart';
+import 'package:amazon_clone/features/auth/widgets/buttomnevigation.dart';
 import 'package:amazon_clone/ipaddres.dart';
 import 'package:amazon_clone/model/usermodel.dart';
 import 'package:amazon_clone/provider/user_provider.dart';
@@ -69,7 +70,7 @@ class AuthServices {
                 'auth_token', jsonDecode(response.body)['token']);
 
             Navigator.pushNamedAndRemoveUntil(
-                context, HomeScreen.routeName, (route) => false);
+                context, ButoomNevigatorCustom.routhname, (route) => false);
           });
     } catch (e) {
       showSnakebar(context, e.toString());
