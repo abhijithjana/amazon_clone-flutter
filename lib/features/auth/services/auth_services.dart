@@ -4,6 +4,7 @@ import 'package:amazon_clone/constatn/globalvariable.dart';
 import 'package:amazon_clone/constatn/httperror.dart';
 import 'package:amazon_clone/constatn/utils.dart';
 import 'package:amazon_clone/features/auth/screens/home/home.dart';
+import 'package:amazon_clone/ipaddres.dart';
 import 'package:amazon_clone/model/usermodel.dart';
 import 'package:amazon_clone/provider/user_provider.dart';
 import 'package:flutter/cupertino.dart';
