@@ -1,4 +1,7 @@
 import 'package:amazon_clone/constatn/globalvariable.dart';
+import 'package:amazon_clone/features/screens/account/widget/belowAppBar.dart';
+import 'package:amazon_clone/features/screens/account/widget/order.dart';
+import 'package:amazon_clone/features/screens/account/widget/topButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -42,6 +45,19 @@ class AccountScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
+      body: Column(
+        children: [
+          BelowwAppBae(),
+          SizedBox(
+            height: 10,
+          ),
+          TopButton(),
+          SizedBox(
+            height: 20,
+          ),
+          Oders()
+        ],
       ),
     );
   }
