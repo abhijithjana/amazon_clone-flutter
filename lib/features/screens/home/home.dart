@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:amazon_clone/features/screens/home/widget/address_box.dart';
+import 'package:amazon_clone/features/screens/home/widget/topCategory.dart';
 import 'package:amazon_clone/provider/user_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +21,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<UserProvider>(context).user;
+    // final user = Provider.of<UserProvider>(context).user;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -87,8 +89,14 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: Center(
-        child: Text(user.toJson()),
+      body: Column(
+        children: const [
+          AddressBox(),
+          SizedBox(
+            height: 10,
+          ),
+          TopCategory()
+        ],
       ),
     );
   }
