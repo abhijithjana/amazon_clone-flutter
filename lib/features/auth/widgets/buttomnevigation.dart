@@ -1,12 +1,8 @@
-import 'dart:ffi';
-
 import 'package:amazon_clone/constatn/globalvariable.dart';
 import 'package:amazon_clone/features/screens/account/screens/accountscreen.dart';
 import 'package:amazon_clone/features/screens/home/home.dart';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class ButoomNevigatorCustom extends StatefulWidget {
   static const String routhname = "/ButoomNevigatorCustom";

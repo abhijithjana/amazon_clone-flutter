@@ -1,3 +1,4 @@
+import 'package:amazon_clone/features/admin/screens/add_product.dart';
 import 'package:amazon_clone/features/screens/authscreen.dart';
 import 'package:amazon_clone/features/screens/home/home.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,6 +8,10 @@ import 'features/auth/widgets/buttomnevigation.dart';
 
 Route<dynamic> generatedrouth(RouteSettings Routesettings) {
   switch (Routesettings.name) {
+    case AddProduct.routename:
+      return MaterialPageRoute(
+          settings: Routesettings, builder: (context) => AddProduct());
+
     case ButoomNevigatorCustom.routhname:
       return MaterialPageRoute(
           settings: Routesettings,
