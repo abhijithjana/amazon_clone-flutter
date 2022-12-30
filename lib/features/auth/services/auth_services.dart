@@ -96,6 +96,8 @@ class AuthServices {
             });
         Provider.of<UserProvider>(context, listen: false).setuser(userRes.body);
       }
-    } catch (e) {}
+    } catch (e) {
+      showSnakebar(context, e.toString());
+    }
   }
 }

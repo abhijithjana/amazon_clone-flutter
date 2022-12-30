@@ -58,105 +58,51 @@ class _AuthScreenState extends State<AuthScreen> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                "Welcome",
-                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 22),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: Container(
-                  color: authname == Auth_name.signup
-                      ? GlobalVariable.backgroundColor
-                      : GlobalVariable.greyBackgroundCOlor,
-                  child: ListTile(
-                    title: const Text(
-                      "Create Account",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    leading: Radio(
-                      activeColor: GlobalVariable.secondaryColor,
-                      value: Auth_name.signup,
-                      groupValue: authname,
-                      onChanged: ((value) => setState(() {
-                            authname = value!;
-                          })),
-                    ),
-                  ),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Welcome",
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 22),
                 ),
-              ),
-              if (authname == Auth_name.signup)
-                Container(
-                  padding: EdgeInsets.all(8),
-                  color: GlobalVariable.backgroundColor,
-                  child: Form(
-                    key: signupkey,
-                    child: Column(
-                      children: [
-                        CustomTextInputfeild(
-                          controller: _nameController,
-                          hint: "Name",
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        CustomTextInputfeild(
-                          controller: _emailController,
-                          hint: "Email",
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        CustomTextInputfeild(
-                          controller: _passwordController,
-                          hint: "Password",
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        CustomElevatedBustton(
-                            text: "Sign up",
-                            ontap: () {
-                              if (signupkey.currentState!.validate()) {
-                                signup();
-                              } else {
-                                print("error");
-                              }
-                            })
-                      ],
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Container(
+                    color: authname == Auth_name.signup
+                        ? GlobalVariable.backgroundColor
+                        : GlobalVariable.greyBackgroundCOlor,
+                    child: ListTile(
+                      title: const Text(
+                        "Create Account",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      leading: Radio(
+                        activeColor: GlobalVariable.secondaryColor,
+                        value: Auth_name.signup,
+                        groupValue: authname,
+                        onChanged: ((value) => setState(() {
+                              authname = value!;
+                            })),
+                      ),
                     ),
                   ),
                 ),
-              Container(
-                color: authname == Auth_name.signin
-                    ? GlobalVariable.backgroundColor
-                    : GlobalVariable.greyBackgroundCOlor,
-                child: ListTile(
-                  title: const Text(
-                    "Sign-in",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  leading: Radio(
-                    activeColor: GlobalVariable.secondaryColor,
-                    value: Auth_name.signin,
-                    groupValue: authname,
-                    onChanged: ((value) => setState(() {
-                          authname = value!;
-                        })),
-                  ),
-                ),
-              ),
-              if (authname == Auth_name.signin)
-                Container(
-                  padding: EdgeInsets.all(8),
-                  color: GlobalVariable.backgroundColor,
-                  child: SingleChildScrollView(
+                if (authname == Auth_name.signup)
+                  Container(
+                    padding: EdgeInsets.all(8),
+                    color: GlobalVariable.backgroundColor,
                     child: Form(
-                      key: signinkey,
+                      key: signupkey,
                       child: Column(
                         children: [
+                          CustomTextInputfeild(
+                            controller: _nameController,
+                            hint: "Name",
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
                           CustomTextInputfeild(
                             controller: _emailController,
                             hint: "Email",
@@ -172,18 +118,74 @@ class _AuthScreenState extends State<AuthScreen> {
                             height: 10,
                           ),
                           CustomElevatedBustton(
-                              text: "Sign in",
+                              text: "Sign up",
                               ontap: () {
-                                if (signinkey.currentState!.validate()) {
-                                  signin();
+                                if (signupkey.currentState!.validate()) {
+                                  signup();
+                                } else {
+                                  print("error");
                                 }
                               })
                         ],
                       ),
                     ),
                   ),
+                Container(
+                  color: authname == Auth_name.signin
+                      ? GlobalVariable.backgroundColor
+                      : GlobalVariable.greyBackgroundCOlor,
+                  child: ListTile(
+                    title: const Text(
+                      "Sign-in",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    leading: Radio(
+                      activeColor: GlobalVariable.secondaryColor,
+                      value: Auth_name.signin,
+                      groupValue: authname,
+                      onChanged: ((value) => setState(() {
+                            authname = value!;
+                          })),
+                    ),
+                  ),
                 ),
-            ],
+                if (authname == Auth_name.signin)
+                  Container(
+                    padding: EdgeInsets.all(8),
+                    color: GlobalVariable.backgroundColor,
+                    child: SingleChildScrollView(
+                      child: Form(
+                        key: signinkey,
+                        child: Column(
+                          children: [
+                            CustomTextInputfeild(
+                              controller: _emailController,
+                              hint: "Email",
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            CustomTextInputfeild(
+                              controller: _passwordController,
+                              hint: "Password",
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            CustomElevatedBustton(
+                                text: "Sign in",
+                                ontap: () {
+                                  if (signinkey.currentState!.validate()) {
+                                    signin();
+                                  }
+                                })
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
           ),
         ),
       ),

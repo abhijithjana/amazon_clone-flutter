@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:amazon_clone/constatn/utils.dart';
+import 'package:amazon_clone/features/admin/admin_services/sell_product.dart';
+import 'package:amazon_clone/features/admin/screens/admin_screen.dart';
 import 'package:amazon_clone/features/auth/widgets/customelevatedbutton.dart';
 import 'package:amazon_clone/features/auth/widgets/textinput.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -23,7 +25,9 @@ class _AddProductState extends State<AddProduct> {
   TextEditingController qualtitycontroller = TextEditingController();
   String catagory = GlobalVariable.categoryImages[0]['title']!;
   List<File> images = [];
+  AdminServices adminServices = AdminServices();
 
+  final _addproductkey = GlobalKey<FormState>();
   @override
   void dispose() {
     // TODO: implement dispose
@@ -39,6 +43,19 @@ class _AddProductState extends State<AddProduct> {
     setState(() {
       images = res;
     });
+  }
+
+  void sellproduct() {
+    if (_addproductkey.currentState!.validate() && images.isNotEmpty) {
+      adminServices.sellProduct(
+          context: context,
+          productname: productnamecontroller.text,
+          description: discriptioncontroller.text,
+          price: double.parse(pricecontroller.text),
+          qualtity: double.parse(qualtitycontroller.text),
+          category: catagory,
+          images: images);
+    }
   }
 
   @override
@@ -57,6 +74,7 @@ class _AddProductState extends State<AddProduct> {
             )),
       ),
       body: Form(
+        key: _addproductkey,
         child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: SingleChildScrollView(
@@ -157,7 +175,11 @@ class _AddProductState extends State<AddProduct> {
                 SizedBox(
                   height: 10,
                 ),
-                CustomElevatedBustton(text: "sell", ontap: () {}),
+                CustomElevatedBustton(
+                    text: "sell",
+                    ontap: () {
+                      sellproduct();
+                    }),
                 SizedBox(
                   height: 10,
                 ),

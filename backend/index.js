@@ -2,6 +2,7 @@
 const express=require('express');
 const mongose=require('mongoose');
 const mduri = require('./privatecontant');
+const adminroute = require('./routes/admin');
 
 const app=express();
 
@@ -13,6 +14,7 @@ const authrouter=require("./routes/auth");
 //middlewere
 app.use(express.json())
 app.use(authrouter);
+app.use(adminroute);
 
 
 //connection
