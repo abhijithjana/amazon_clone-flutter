@@ -1,4 +1,5 @@
 import 'package:amazon_clone/constatn/globalvariable.dart';
+import 'package:amazon_clone/features/screens/home/category_page.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
@@ -16,25 +17,31 @@ class TopCategory extends StatelessWidget {
         itemExtent: 80,
         itemCount: GlobalVariable.categoryImages.length,
         itemBuilder: ((context, index) {
-          return Column(
-            children: [
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(50),
-                  child: Image.asset(
-                    GlobalVariable.categoryImages[index]['image']!,
-                    fit: BoxFit.cover,
-                    height: 40,
-                    width: 40,
+          return GestureDetector(
+            onTap: (() {
+              Navigator.pushNamed(context, CategorPage.routename,
+                  arguments: GlobalVariable.categoryImages[index]['title']!);
+            }),
+            child: Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(50),
+                    child: Image.asset(
+                      GlobalVariable.categoryImages[index]['image']!,
+                      fit: BoxFit.cover,
+                      height: 40,
+                      width: 40,
+                    ),
                   ),
                 ),
-              ),
-              Text(
-                GlobalVariable.categoryImages[index]['title']!,
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
-              )
-            ],
+                Text(
+                  GlobalVariable.categoryImages[index]['title']!,
+                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                )
+              ],
+            ),
           );
         }),
       ),
