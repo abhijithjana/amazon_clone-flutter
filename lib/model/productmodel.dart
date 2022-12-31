@@ -2,12 +2,12 @@ import 'dart:convert';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class ProductModel {
-  final String name;
-  final String description;
-  final double price;
-  final double qualtity;
-  final String category;
-  final List<String> images;
+  final dynamic name;
+  final dynamic description;
+  final dynamic price;
+  final dynamic qualtity;
+  final dynamic category;
+  final List<dynamic> images;
   final String? id;
   ProductModel({
     required this.name,
@@ -33,13 +33,13 @@ class ProductModel {
 
   factory ProductModel.fromMap(Map<String, dynamic> map) {
     return ProductModel(
-      name: map['name'] ?? "",
-      description: map['description'] ?? "",
-      price: map['price'] ?? 0.0,
-      qualtity: map['qualtity'] ?? 0.0,
-      category: map['category'] ?? "",
-      images: List<String>.from(map['images']),
-      id: map['_id'],
+      name: map['name'] as dynamic,
+      description: map['description'] as dynamic,
+      price: map['price'] as dynamic,
+      qualtity: map['qualtity'] as dynamic,
+      category: map['category'] as dynamic,
+      images: List<dynamic>.from(map['images'] as List<dynamic>),
+      id: map['_id'] != null ? map['_id'] as String : null,
     );
   }
 

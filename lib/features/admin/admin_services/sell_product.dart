@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:amazon_clone/constatn/httperror.dart';
 import 'package:amazon_clone/constatn/utils.dart';
@@ -48,17 +49,71 @@ class AdminServices {
         },
         body: product.toJson(),
       );
-      print(res.body);
 
       httperror(
           response: res,
           snakbar: context,
           Onsucess: () {
             showSnakebar(context, 'Product added sucessfully ');
-            Navigator.pop(context);
+
+            Navigator.pop(context, 'refresh');
           });
     } catch (e) {
       print('$e');
+      showSnakebar(context, e.toString());
+    }
+  }
+
+  Future<List<ProductModel>> fetchallproduct(BuildContext context) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    List<ProductModel> productlist = [];
+    try {
+      http.Response response = await http.get(
+        Uri.parse('$uri/admin/getproduct'),
+        headers: <String, String>{
+          'content-type': 'application/json; Charset=UTF-8',
+          'auth_token': userProvider.user.token
+        },
+      );
+
+      httperror(
+          response: response,
+          snakbar: context,
+          Onsucess: (() {
+            for (int i = 0; i < jsonDecode(response.body).length; i++) {
+              productlist.add(ProductModel.fromJson(
+                  jsonEncode(jsonDecode(response.body)[i])));
+            }
+          }));
+    } catch (e) {
+      print(e);
+      showSnakebar(context, e.toString());
+    }
+    return productlist;
+  }
+
+  void deleteproduct(
+      String id, BuildContext context, VoidCallback onScucesss) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    try {
+      http.Response res = await http.post(
+        Uri.parse('$uri/admin/deleteproduct'),
+        headers: <String, String>{
+          'content-type': 'application/json; Charset=UTF-8',
+          'auth_token': userProvider.user.token
+        },
+        body: jsonEncode({'id': id}),
+      );
+
+      httperror(
+          response: res,
+          snakbar: context,
+          Onsucess: () {
+            onScucesss;
+          });
+
+      print(res.body);
+    } catch (e) {
       showSnakebar(context, e.toString());
     }
   }
