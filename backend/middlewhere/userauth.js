@@ -1,6 +1,7 @@
 const jwt=require("jsonwebtoken")
 const auth=async(req,res,next)=>{
   try {
+   
     const token=req.header("auth_token");
     if(!token) return res.status(401).json({msg:"unavailable to verify you without providing token"});
     const verified= jwt.verify(token,'screeatco+de@#$%%&**##');

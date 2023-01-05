@@ -9,12 +9,14 @@ const app=express();
 const port=3000;
 //module import 
 const authrouter=require("./routes/auth");
+const productroute = require('./routes/product');
 
 
 //middlewere
 app.use(express.json())
 app.use(authrouter);
 app.use(adminroute);
+app.use(productroute)
 
 
 //connection

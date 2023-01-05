@@ -2,6 +2,7 @@ import 'package:amazon_clone/features/admin/screens/add_product.dart';
 import 'package:amazon_clone/features/screens/authscreen.dart';
 import 'package:amazon_clone/features/screens/home/category_page.dart';
 import 'package:amazon_clone/features/screens/home/home.dart';
+import 'package:amazon_clone/features/search/screens/searchScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,12 @@ import 'features/auth/widgets/buttomnevigation.dart';
 
 Route<dynamic> generatedrouth(RouteSettings Routesettings) {
   switch (Routesettings.name) {
+    case SeacrchScreens.Routename:
+      String searchelement = Routesettings.arguments as String;
+      return MaterialPageRoute(
+          settings: Routesettings,
+          builder: (context) => SeacrchScreens(searchelement: searchelement));
+
     case CategorPage.routename:
       String Category = Routesettings.arguments as String;
       return MaterialPageRoute(
