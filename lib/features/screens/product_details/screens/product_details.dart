@@ -1,28 +1,21 @@
-import 'package:amazon_clone/features/screens/home/widget/address_box.dart';
-import 'package:amazon_clone/features/screens/home/widget/carosel_image.dart';
-import 'package:amazon_clone/features/screens/home/widget/deal_of_the_day.dart';
-import 'package:amazon_clone/features/screens/home/widget/topCategory.dart';
-import 'package:amazon_clone/features/screens/search/screens/searchScreen.dart';
-import 'package:amazon_clone/provider/user_provider.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:provider/provider.dart';
 import 'package:amazon_clone/constatn/globalvariable.dart';
+import 'package:amazon_clone/constatn/star.dart';
+import 'package:amazon_clone/features/screens/search/screens/searchScreen.dart';
+import 'package:amazon_clone/model/productmodel.dart';
+import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
-  static const String routeName = "/home";
+class ProductDetail extends StatefulWidget {
+  static const String Routename = '/productdetails';
+  final ProductModel product;
+  const ProductDetail({super.key, required this.product});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<ProductDetail> createState() => _ProductDetailState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _ProductDetailState extends State<ProductDetail> {
   @override
   Widget build(BuildContext context) {
-    // final user = Provider.of<UserProvider>(context).user;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -96,17 +89,14 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: SingleChildScrollView(
         child: Column(
-          children: const [
-            AddressBox(),
-            SizedBox(
-              height: 10,
-            ),
-            TopCategory(),
-            SizedBox(
-              height: 10,
-            ),
-            Carosel_image(),
-            DealOfTheDay()
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(widget.product.id!),
+                const Star(initialrating: 4)
+              ],
+            )
           ],
         ),
       ),
