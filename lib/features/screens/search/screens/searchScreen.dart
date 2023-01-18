@@ -1,8 +1,9 @@
 import 'package:amazon_clone/constatn/buffering.dart';
 import 'package:amazon_clone/constatn/globalvariable.dart';
 import 'package:amazon_clone/features/screens/home/widget/address_box.dart';
-import 'package:amazon_clone/features/search/service/searchsrvice.dart';
-import 'package:amazon_clone/features/search/widget/searchwidget.dart';
+import 'package:amazon_clone/features/screens/product_details/screens/product_details.dart';
+import 'package:amazon_clone/features/screens/search/service/searchsrvice.dart';
+import 'package:amazon_clone/features/screens/search/widget/searchwidget.dart';
 import 'package:amazon_clone/model/productmodel.dart';
 import 'package:flutter/material.dart';
 
@@ -115,7 +116,13 @@ class _SeacrchScreensState extends State<SeacrchScreens> {
                     child: ListView.builder(
                         itemCount: products!.length,
                         itemBuilder: (context, index) {
-                          return SearchWidget(products: products![index]);
+                          return GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, ProductDetail.Routename,
+                                    arguments: products![index]);
+                              },
+                              child: SearchWidget(products: products![index]));
                         })),
               ],
             ),

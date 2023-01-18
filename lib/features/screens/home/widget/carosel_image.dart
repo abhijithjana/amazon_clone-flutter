@@ -1,5 +1,4 @@
 import 'package:amazon_clone/constatn/globalvariable.dart';
-import 'package:carousel_images/carousel_images.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
