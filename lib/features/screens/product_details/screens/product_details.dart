@@ -2,11 +2,14 @@ import 'package:amazon_clone/constatn/globalvariable.dart';
 import 'package:amazon_clone/constatn/star.dart';
 import 'package:amazon_clone/features/auth/widgets/customelevatedbutton.dart';
 import 'package:amazon_clone/features/screens/home/widget/address_box.dart';
+import 'package:amazon_clone/features/screens/product_details/services/productdetailsevice.dart';
 import 'package:amazon_clone/features/screens/search/screens/searchScreen.dart';
 import 'package:amazon_clone/model/productmodel.dart';
+import 'package:amazon_clone/provider/user_provider.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:provider/provider.dart';
 
 class ProductDetail extends StatefulWidget {
   static const String Routename = '/productdetails';
@@ -18,6 +21,23 @@ class ProductDetail extends StatefulWidget {
 }
 
 class _ProductDetailState extends State<ProductDetail> {
+  double avg = 0.0;
+  double myrating = 0.0;
+  @override
+  void initState() {
+    double totalrating = 0;
+    print(widget.product.rating![0].rating + totalrating);
+    for (int i = 0; i < widget.product.rating!.length; i++) {
+      totalrating += widget.product.rating![i].rating;
+      if (widget.product.rating![i].userid.toString() ==
+          (Provider.of<UserProvider>(context, listen: false).user.id)) {
+        myrating = myrating + widget.product.rating![i].rating;
+      }
+    }
+    if (totalrating != 0) avg = totalrating / widget.product.rating!.length;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,10 +120,7 @@ class _ProductDetailState extends State<ProductDetail> {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(widget.product.id!),
-                  const Star(initialrating: 4)
-                ],
+                children: [Text(widget.product.id!), Star(initialrating: avg)],
               ),
             ),
             Padding(
@@ -189,7 +206,7 @@ class _ProductDetailState extends State<ProductDetail> {
               ),
             ),
             RatingBar.builder(
-                initialRating: 0,
+                initialRating: myrating,
                 allowHalfRating: true,
                 minRating: 1,
                 itemCount: 5,
@@ -199,7 +216,12 @@ class _ProductDetailState extends State<ProductDetail> {
                       Icons.star,
                       color: GlobalVariable.secondaryColor,
                     ),
-                onRatingUpdate: (rating) {})
+                onRatingUpdate: (rating) async {
+                  ProductDetailService().rating(
+                      context: context,
+                      product: widget.product,
+                      rating: rating);
+                })
           ],
         ),
       ),
