@@ -2,7 +2,9 @@ import 'dart:ui';
 
 import 'package:amazon_clone/constatn/star.dart';
 import 'package:amazon_clone/model/productmodel.dart';
+import 'package:amazon_clone/provider/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SearchWidget extends StatelessWidget {
   final ProductModel products;
@@ -10,13 +12,21 @@ class SearchWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double totalrating = 0;
+    print(products.rating![0].rating + totalrating);
+    for (int i = 0; i < products.rating!.length; i++) {
+      totalrating += products.rating![i].rating;
+    }
+    double avg = 0;
+    if (totalrating != 0) avg = totalrating / products.rating!.length;
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 10),
       child: Row(
         children: [
           Image.network(
             products.images[0],
-            fit: BoxFit.fitWidth,
+            fit: BoxFit.contain,
             height: 135,
             width: 135,
           ),
@@ -38,7 +48,7 @@ class SearchWidget extends StatelessWidget {
                 width: 235,
                 padding: const EdgeInsets.only(left: 10, top: 5),
                 child: Star(
-                  initialrating: 4,
+                  initialrating: avg,
                 ),
               ),
               Container(

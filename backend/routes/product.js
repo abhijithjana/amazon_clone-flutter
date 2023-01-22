@@ -72,5 +72,44 @@ productroute.post('/api/rating/product',auth,async(req,res)=>{
 
 
 
+productroute.get('/api/product/dealoftheday',auth,async(req,res)=>{
+
+  try {
+    let topratedp=0;
+     let p=new Product();
+     let products= await Product.find();
+
+                
+     let avg=0;
+     let t=0
+              for(let j=0;j<products.length;j++){
+              
+                for(let i=0;i<products[j].rating.length;i++){
+                  t+=products[j].rating[i].rating;
+            }
+            t>0?avg=t/products[j].rating.length:0;
+            if(topratedp<avg){
+        
+       
+              topratedp=avg;
+                 p=products[j];
+                
+              }
+              }
+    
+
+     
+     
+      
+      console.log(p);
+      res.status(200).json(p)
+     }
+      catch (error) {
+    res.status(501).json({error:error.message});
+  }
+});
+
+
+
 
 module.exports=productroute;
