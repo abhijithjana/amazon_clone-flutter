@@ -1,6 +1,6 @@
 const express = require("express");
 const auth = require("../middlewhere/userauth");
-const Product = require("../model/productmodel");
+const {Product} = require("../model/productmodel");
 const ratingSchema = require("../model/rating");
 
 const productroute=express.Router();

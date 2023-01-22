@@ -31,4 +31,31 @@ class ProductDetailService {
       showSnakebar(context, e.toString());
     }
   }
+
+  void addcart({
+    required BuildContext context,
+    required ProductModel product,
+  }) async {
+    try {
+      final user = Provider.of<UserProvider>(context, listen: false);
+      http.Response response = await http.post(Uri.parse('$uri/user/add-card'),
+          headers: <String, String>{
+            'content-type': 'application/json; Charset=UTF-8',
+            'auth_token': user.user.token
+          },
+          body: jsonEncode({'id': product.id}));
+
+      httperror(
+          response: response,
+          snakbar: context,
+          Onsucess: () {
+            UserModel users =
+                user.user.copyWith(cart: jsonDecode(response.body)['cart']);
+
+            user.onleonevalechange(users);
+          });
+    } catch (e) {
+      showSnakebar(context, e.toString());
+    }
+  }
 }

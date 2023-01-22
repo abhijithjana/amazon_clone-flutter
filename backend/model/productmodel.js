@@ -42,4 +42,4 @@ const productScheema=mongoose.Schema(
 const Product=mongoose.model('Product',productScheema);
 
 
-module.exports=Product;
+module.exports={Product,productScheema};

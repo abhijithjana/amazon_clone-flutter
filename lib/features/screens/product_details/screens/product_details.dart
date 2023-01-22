@@ -187,7 +187,10 @@ class _ProductDetailState extends State<ProductDetail> {
               padding: EdgeInsets.all(10),
               child: CustomElevatedBustton(
                 text: 'Add to cart',
-                ontap: () {},
+                ontap: () {
+                  ProductDetailService()
+                      .addcart(context: context, product: widget.product);
+                },
                 color: Color.fromRGBO(254, 216, 19, 1),
               ),
             ),

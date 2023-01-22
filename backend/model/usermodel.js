@@ -1,4 +1,5 @@
-const mongoose=require('mongoose')
+const mongoose=require('mongoose');
+const { productScheema } = require('./productmodel');
 
 const userSchema=mongoose.Schema(
     {
@@ -33,7 +34,18 @@ const userSchema=mongoose.Schema(
         type:{
             type:String,
             default:"user"
-        }
+        },
+
+        cart:[
+            {
+                product:productScheema,
+                
+                count:{
+                    type:Number,
+                    require:true
+                }
+            }
+        ]
     }
 )
 

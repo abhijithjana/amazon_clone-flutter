@@ -1,8 +1,10 @@
 import 'package:amazon_clone/constatn/globalvariable.dart';
 import 'package:amazon_clone/features/screens/account/screens/accountscreen.dart';
 import 'package:amazon_clone/features/screens/home/home.dart';
+import 'package:amazon_clone/provider/user_provider.dart';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ButoomNevigatorCustom extends StatefulWidget {
   static const String routhname = "/ButoomNevigatorCustom";
@@ -33,6 +35,8 @@ class _ButoomNevigatorCustomState extends State<ButoomNevigatorCustom> {
 
   @override
   Widget build(BuildContext context) {
+    final cartlength = context.watch<UserProvider>().user.cart.length;
+
     return Container(
       child: Scaffold(
         body: pages[_pageno],
@@ -83,7 +87,7 @@ class _ButoomNevigatorCustomState extends State<ButoomNevigatorCustom> {
                                 width: buttombarborderwidth))),
                     child: Badge(
                         elevation: 0,
-                        badgeContent: Text("3"),
+                        badgeContent: Text(cartlength.toString()),
                         badgeColor: GlobalVariable.backgroundColor,
                         child: Icon(Icons.shopping_cart_outlined)),
                   )),

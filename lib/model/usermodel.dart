@@ -9,15 +9,16 @@ class UserModel {
   final String token;
   final String type;
   final String email;
-  UserModel({
-    required this.id,
-    required this.name,
-    required this.password,
-    required this.address,
-    required this.token,
-    required this.type,
-    required this.email,
-  });
+  final List<dynamic> cart;
+  UserModel(
+      {required this.id,
+      required this.name,
+      required this.password,
+      required this.address,
+      required this.token,
+      required this.type,
+      required this.email,
+      required this.cart});
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -28,6 +29,7 @@ class UserModel {
       'token': token,
       'type': type,
       'email': email,
+      'cart': cart
     };
   }
 
@@ -40,6 +42,11 @@ class UserModel {
       token: map['token'] as String,
       type: map['type'] as String,
       email: map['email'] as String,
+      cart: List<Map<String, dynamic>>.from(
+        map['cart'].map(
+          (x) => Map<String, dynamic>.from(x),
+        ),
+      ),
     );
   }
 
@@ -47,4 +54,26 @@ class UserModel {
 
   factory UserModel.fromJson(String source) =>
       UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  UserModel copyWith({
+    String? id,
+    String? name,
+    String? password,
+    String? address,
+    String? token,
+    String? type,
+    String? email,
+    List<dynamic>? cart,
+  }) {
+    return UserModel(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      password: password ?? this.password,
+      address: address ?? this.address,
+      token: token ?? this.token,
+      type: type ?? this.type,
+      email: email ?? this.email,
+      cart: cart ?? this.cart,
+    );
+  }
 }

@@ -27,7 +27,8 @@ class AuthServices {
           address: "",
           token: "",
           type: "",
-          email: email);
+          email: email,
+          cart: []);
 
       http.Response response = await http.post(Uri.parse('$uri/user/signup'),
           body: user.toJson(),
