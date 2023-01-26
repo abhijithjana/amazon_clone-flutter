@@ -1,7 +1,7 @@
 import 'package:amazon_clone/constatn/globalvariable.dart';
 import 'package:amazon_clone/features/admin/screens/admin_screen.dart';
 import 'package:amazon_clone/features/screens/authscreen.dart';
-import 'package:amazon_clone/features/screens/home/home.dart';
+
 import 'package:amazon_clone/features/auth/services/auth_services.dart';
 import 'package:amazon_clone/provider/user_provider.dart';
 import 'package:amazon_clone/routh.dart';
@@ -13,7 +13,7 @@ import 'features/auth/widgets/buttomnevigation.dart';
 void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (context) => UserProvider()),
-  ], child: MyApp()));
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -39,16 +39,16 @@ class _MyAppState extends State<MyApp> {
       onGenerateRoute: ((settings) => generatedrouth(settings)),
       theme: ThemeData(
           scaffoldBackgroundColor: GlobalVariable.backgroundColor,
-          colorScheme: ColorScheme.light(
+          colorScheme: const ColorScheme.light(
             primary: GlobalVariable.secondaryColor,
           ),
-          appBarTheme: AppBarTheme(
+          appBarTheme: const AppBarTheme(
               elevation: 0, iconTheme: IconThemeData(color: Colors.black))),
       home: Provider.of<UserProvider>(context).user.token.isEmpty
-          ? AuthScreen()
+          ? const AuthScreen()
           : Provider.of<UserProvider>(context).user.type == "user"
-              ? ButoomNevigatorCustom()
-              : AdminScreen(),
+              ? const ButoomNevigatorCustom()
+              : const AdminScreen(),
     );
   }
 }

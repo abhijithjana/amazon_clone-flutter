@@ -52,7 +52,35 @@ class ProductDetailService {
             UserModel users =
                 user.user.copyWith(cart: jsonDecode(response.body)['cart']);
 
-            user.onleonevalechange(users);
+            user.onlyonevalechange(users);
+          });
+    } catch (e) {
+      showSnakebar(context, e.toString());
+    }
+  }
+
+  void removecart({
+    required BuildContext context,
+    required ProductModel product,
+  }) async {
+    try {
+      final user = Provider.of<UserProvider>(context, listen: false);
+      http.Response response = await http.delete(
+        Uri.parse('$uri/user/remove-card/${product.id}'),
+        headers: <String, String>{
+          'content-type': 'application/json; Charset=UTF-8',
+          'auth_token': user.user.token
+        },
+      );
+
+      httperror(
+          response: response,
+          snakbar: context,
+          Onsucess: () {
+            UserModel users =
+                user.user.copyWith(cart: jsonDecode(response.body)['cart']);
+
+            user.onlyonevalechange(users);
           });
     } catch (e) {
       showSnakebar(context, e.toString());

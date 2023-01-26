@@ -19,7 +19,7 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onleonevalechange(UserModel user) {
+  void onlyonevalechange(UserModel user) {
     _user = user;
     notifyListeners();
   }
