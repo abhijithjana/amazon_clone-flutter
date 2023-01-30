@@ -1,6 +1,6 @@
 import 'package:amazon_clone/constatn/globalvariable.dart';
 import 'package:amazon_clone/features/admin/screens/admin_screen.dart';
-import 'package:amazon_clone/features/screens/authscreen.dart';
+import 'package:amazon_clone/features/auth/authscreen.dart';
 
 import 'package:amazon_clone/features/auth/services/auth_services.dart';
 import 'package:amazon_clone/provider/user_provider.dart';

@@ -26,7 +26,12 @@ class ProductDetailService {
           },
           body: jsonEncode({'id': product.id, 'rating': rating}));
 
-      httperror(response: response, snakbar: context, Onsucess: () {});
+      httperror(
+          response: response,
+          snakbar: context,
+          Onsucess: () {
+            print(jsonDecode(response.body));
+          });
     } catch (e) {
       showSnakebar(context, e.toString());
     }

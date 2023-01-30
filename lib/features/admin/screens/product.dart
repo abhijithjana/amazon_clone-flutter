@@ -1,5 +1,5 @@
 import 'package:amazon_clone/constatn/buffering.dart';
-import 'package:amazon_clone/features/admin/admin_services/sell_product.dart';
+import 'package:amazon_clone/features/admin/admin_services/services.dart';
 import 'package:amazon_clone/features/admin/screens/add_product.dart';
 import 'package:amazon_clone/features/screens/account/widget/singleproduct.dart';
 import 'package:amazon_clone/model/productmodel.dart';

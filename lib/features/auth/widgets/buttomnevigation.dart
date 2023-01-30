@@ -3,7 +3,7 @@ import 'package:amazon_clone/features/screens/account/screens/accountscreen.dart
 import 'package:amazon_clone/features/screens/cart/screens/cartscreen.dart';
 import 'package:amazon_clone/features/screens/home/home.dart';
 import 'package:amazon_clone/provider/user_provider.dart';
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -79,10 +79,12 @@ class _ButoomNevigatorCustomState extends State<ButoomNevigatorCustom> {
                                   ? GlobalVariable.selectedNavBarColor
                                   : GlobalVariable.backgroundColor,
                               width: buttombarborderwidth))),
-                  child: Badge(
-                      elevation: 0,
+                  child: badges.Badge(
+                      badgeStyle: badges.BadgeStyle(
+                        elevation: 0,
+                        badgeColor: GlobalVariable.backgroundColor,
+                      ),
                       badgeContent: Text(cartlength.toString()),
-                      badgeColor: GlobalVariable.backgroundColor,
                       child: Icon(Icons.shopping_cart_outlined)),
                 )),
           ]),

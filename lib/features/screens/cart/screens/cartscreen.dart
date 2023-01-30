@@ -1,4 +1,5 @@
 import 'package:amazon_clone/constatn/globalvariable.dart';
+import 'package:amazon_clone/features/address/screen/addressscreen.dart';
 import 'package:amazon_clone/features/auth/widgets/customelevatedbutton.dart';
 import 'package:amazon_clone/features/screens/cart/widget/cartproduct.dart';
 import 'package:amazon_clone/features/screens/cart/widget/cartsubtotal.dart';
@@ -19,6 +20,12 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     final cart = context.watch<UserProvider>().user.cart;
+    int sum = 0;
+
+    cart
+        .map((product) =>
+            sum += product['count'] * product['product']['price'] as int)
+        .toList();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -94,13 +101,16 @@ class _CartScreenState extends State<CartScreen> {
         child: Column(
           children: [
             const AddressBox(),
-            const CartSubTotal(),
+            CartSubTotal(sum: sum),
             Padding(
               padding: const EdgeInsets.all(8),
               child: CustomElevatedBustton(
                 text: 'Proceed to Buy (${cart.length} items)',
                 color: Colors.yellow[600],
-                ontap: () {},
+                ontap: () {
+                  Navigator.pushNamed(context, AddressScreen.routename,
+                      arguments: sum.toString());
+                },
               ),
             ),
             const SizedBox(

@@ -3,18 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CartSubTotal extends StatelessWidget {
-  const CartSubTotal({super.key});
+  final int sum;
+  const CartSubTotal({super.key, required this.sum});
 
   @override
   Widget build(BuildContext context) {
-    final cart = context.watch<UserProvider>().user.cart;
-    int sum = 0;
-
-    cart
-        .map((product) =>
-            sum += product['count'] * product['product']['price'] as int)
-        .toList();
-
     return Container(
       alignment: Alignment.topLeft,
       margin: const EdgeInsets.all(10),

@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:amazon_clone/constatn/utils.dart';
-import 'package:amazon_clone/features/admin/admin_services/sell_product.dart';
+import 'package:amazon_clone/features/admin/admin_services/services.dart';
 import 'package:amazon_clone/features/admin/screens/admin_screen.dart';
 import 'package:amazon_clone/features/auth/widgets/customelevatedbutton.dart';
 import 'package:amazon_clone/features/auth/widgets/textinput.dart';

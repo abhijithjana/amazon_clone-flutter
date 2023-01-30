@@ -1,4 +1,7 @@
+import 'package:amazon_clone/features/admin/screens/alaythics.dart';
+import 'package:amazon_clone/features/admin/screens/orderscreen.dart';
 import 'package:amazon_clone/features/admin/screens/product.dart';
+import 'package:amazon_clone/features/orderdetails.dart/screens/orderdetailsscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:amazon_clone/constatn/globalvariable.dart';
 
@@ -18,12 +21,8 @@ class _AdminScreenState extends State<AdminScreen> {
 
   List<Widget> pages = [
     const Myproduct(),
-    Center(
-      child: Text("Card"),
-    ),
-    Center(
-      child: Text("Card"),
-    )
+    const OrderedProduct(),
+    const Alaylatics()
   ];
 
   void updatepage(int page) {

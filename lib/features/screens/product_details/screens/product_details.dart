@@ -26,11 +26,12 @@ class _ProductDetailState extends State<ProductDetail> {
   @override
   void initState() {
     double totalrating = 0;
-    print(widget.product.rating![0].rating + totalrating);
+
     for (int i = 0; i < widget.product.rating!.length; i++) {
       totalrating += widget.product.rating![i].rating;
       if (widget.product.rating![i].userid.toString() ==
-          (Provider.of<UserProvider>(context, listen: false).user.id)) {
+          (Provider.of<UserProvider>(context, listen: false).user.id)
+              .toString()) {
         myrating = myrating + widget.product.rating![i].rating;
       }
     }
@@ -224,6 +225,7 @@ class _ProductDetailState extends State<ProductDetail> {
                       context: context,
                       product: widget.product,
                       rating: rating);
+                  setState(() {});
                 })
           ],
         ),
